@@ -1,13 +1,27 @@
 'use strict';
 
-const rows = document.querySelectorAll('tr');
+function cloneTableColumn() {
+  const table = document.querySelector('table');
 
-rows.forEach((row) => {
-  const targetCell = row.cells[1];
+  if (!table) {
+    return;
+  }
 
-  const clone = targetCell.cloneNode(true);
+  const rows = table.querySelectorAll('tr');
 
-  const lastCell = row.cells[row.cells.length - 1];
+  rows.forEach((row) => {
+    const targetCell = row.cells[1];
 
-  row.insertBefore(clone, lastCell);
-});
+    if (!targetCell) {
+      return;
+    }
+
+    const clone = targetCell.cloneNode(true);
+
+    const lastCell = row.cells[row.cells.length - 1];
+
+    row.insertBefore(clone, lastCell || null);
+  });
+}
+
+cloneTableColumn();
